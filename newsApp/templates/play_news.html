@@ -2,19 +2,19 @@
 
 {% block content %}
 <div class="container">
-    {% for x in play_news %}
     <div class="row">
+        {% for x in play_news %}
         <div class="col-lg-4 col-md-6 ">
             <div class="card cd-rsp2 mx-auto  p-0 my-2">
-                <a href=""><img class="card-img-top" src="{{x.image.url}}" alt=""></a>
+                <a href="{% url 'news-details' x.slug %}"><img class="card-img-top" src="{{x.image.url}}" alt=""></a>
                 <div class="card-body">
-                    <a style="color: black;" href="">
+                    <a style="color: black;" href="{% url 'news-details' x.slug %}">
                         <p class="card-title my-2">{{ x.title }}</p>
                     </a>
                 </div>
             </div>
         </div>
+        {% endfor%}
     </div>
-    {% endfor%}
 </div>
 {% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="text-primary mt-3">আপনার অনুসন্ধানকৃত খবর :</h5>
+    <div class="row mt-3">
+        {% for n in data %}
+        <div class="col-md-6">
+     <div class="d-flex align-items-center  mb-3 border-bottom bg-white " style="height:70px ;">
+         <a href="{% url 'news-details' n.slug %}"><img class="img-fluid" src="{{ n.image.url }}" alt="" style="height:69px ; width: 150px;"></a>
+         <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center">
+             <a style="font-size: 13px;" class="m-0 text-secondary font-weight-bold" href="{% url 'news-details' n.slug %}">{{ n.title }}.</a>
+         </div>
+     </div>
+ </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

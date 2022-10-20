@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import *
 import datetime
+from django.db.models import Q
+
 def news(request):
     ads = Adds.objects.all()
     news = News.objects.all().order_by('-date')[:12]
@@ -32,21 +34,20 @@ def entertainment(request):
 def play(request):
     play_news = News.objects.filter(category__icontains='খেলা').order_by('-date')
     return render(request, 'play_news.html', {'play_news': play_news})
-def news_details(request, pk):
-    details = News.objects.get(pk=pk)
+def news_details(request, slug):
+    details = News.objects.get(slug=slug)
     return render(request, 'news_details.html',{'details': details})
 def contract(request):
     return render(request, 'contract.html')
 def search(request):
-    news = News.objects.all()
-    if request.method == "GET":
-        nt = request.GET.get('que')
-        if nt != None:
-            news = News.objects.filter(title__icontains=nt)
+    news = request.GET['q']
+    query = (Q(title__icontains=news) | Q(details__icontains=news))
+    data = News.objects.filter(query)
+
     context={
-        'news': news
+        'data': data,
     }
-    return render(request, 'base.html', context)
+    return render(request, 'search.html', context)
 
 
 

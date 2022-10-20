@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newspaper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto p-2">
+                <li class="nav-item"><a class="nav-link">{% now "SHORT_DATETIME_FORMAT" %}</a></li>
+                <li class="nav-item"><a class="nav-link"><img src="{% static 'image/Gcnews.png' %}" style="height:30px; width:160px;"></a></li>
+                <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'national-news'%}">Nation News</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'international-news' %}">International News</a></li>
+                <li  class="nav-item"><a class="nav-link" href="{% url 'entertainment-news' %}">Entertainment News</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'play-news' %}">Play News</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contract' %}">Contract Us</a></li>
+            </ul>
+             <form class="d-flex" method="get">
+            <input class="form-control me-2" type="text" placeholder="Search" name="que">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+    </div>
+</nav>
+
+{% block content %}
+{% endblock content %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

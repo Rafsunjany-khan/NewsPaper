@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load social_share %}
+
 {% block content %}
 <div class="container">
     <div class="row">
@@ -7,6 +9,17 @@
             <img class="img-top" src="{{details.image.url}}" alt="">
         </div>
         <p class="my-2">{{ details.details|safe }}</p>
+    </div>
+    <div class="row">
+        <p>
+            {% post_to_facebook object_or_url "Facebook!" %}
+            {% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "Twitter" %}
+            {% post_to_whatsapp object_or_url "WhatsApp" %}
+            {% post_to_linkedin object_or_url "linkedin"%}
+            {% copy_to_clipboard object_or_url "clipboard!" %}
+            {% send_email object.title "{{object.title}}. Check it out!" object_or_url "email" %}
+        </p>
+        <div class="fb-comments" data-href="http://127.0.0.1:8000/news-details/{{details.slug}}" data-width="" data-numposts=""></div>
     </div>
 </div>
 {% endblock content %}
